@@ -1,37 +1,90 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion
+{% block title %}edusign v2 - Connexion
+{% endblock %}
+
+{% block stylesheets %}
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			max-width: 500px;
+			margin: 50px auto;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+		.alert {
+			color: #a94442;
+			background-color: #f2dede;
+			border-color: #ebccd1;
+			padding: 10px;
+			border-radius: 4px;
+			margin-bottom: 20px;
+		}
+		label {
+			display: block;
+			margin-bottom: 5px;
+		}
+		.form-control {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: 4px;
+			border: 1px solid #ccc;
+		}
+		.btn {
+			padding: 10px 15px;
+			background-color: yellow;
+			color: black;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-weight: bold;
+		}
+		.btn:hover {
+			background-color: orange;
+		}
+		.site-title {
+			font-size: 24px;
+			font-weight: bold;
+			margin-bottom: 20px;
+			text-align: center;
+			color: #333;
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-	<form method="post">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
+	<div class="container">
+		<div class="site-title">Edusign V2</div>
+		<form method="post">
+			{% if error %}
+				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-		{% if app.user %}
-			<div class="mb-3">
-				Vous êtes connecté en tant que
-				{{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Déconnexion</a>
-			</div>
-		{% endif %}
+			{% if app.user %}
+				<div class="mb-3">
+					Vous êtes connecté en tant que
+					{{ app.user.userIdentifier }},
+					<a href="{{ path('app_logout') }}">Déconnexion</a>
+				</div>
+			{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
-		<label for="inputEmail">Votre adresse mail</label>
-		<select name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-        <option value="">Sélectionner votre compte</option>
-        {% for emailChoice in email_choices %}
-            <option value="{{ emailChoice }}">{{ emailChoice }}</option>
-        {% endfor %}
-    </select>
-		<label for="inputPassword">Password</label>
-		<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+			<h1 class="h3 mb-3 font-weight-normal">Bienvenue !
+			</h1>
+			<label for="inputEmail">Email</label>
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-		<button class="btn btn-lg btn-primary" type="submit">
-			Se connecter
-		</button>
-	</form>
+			<label for="inputPassword">Password</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			<button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+		</form>
+	</div>
 {% endblock %}
