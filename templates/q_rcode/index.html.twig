@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QRcodeController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		{# {
+			margin: 0;
+			padding: 0;
+			border: none;
+			outline: none;
+			box-sizing: border-box;
+			-webkit-tap-highlight-color: transparent;
+		} #}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #040404;
+		}
+
+		#qr {
+			position: relative;
+		}
+
+		#qr::before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+
+			/* ne pas mettre une taille trop grande. sinon le qr code ne sera plus lisible */
+			width: 36%;
+			height: 36%;
+			border-radius: 50%;
+
+
+			background-size: cover;
+		}
+	</style>
+
+	<div id="qrcode"></div>
+    
+	<script src="qrcode.js"></script>
+	<script>
+		const href = "http://127.0.0.1:8000/login.html.twig";
+const size = 500;
+
+function generateQRCode() {
+const timeStamp = new Date().getTime();
+const newHref = href + "?timestamp=" + timeStamp;
+
+// Si un QR Code existe déjà, supprimez-le pour le recréer.
+const container = document.querySelector("#qrcode");
+container.innerHTML = "";
+
+new QRCode(container, {
+text: newHref,
+width: size,
+height: size,
+colorDark: "#000014",
+colorLight: "#0099ff"
+});
+}
+
+generateQRCode(); // Générer le QR Code une première fois au chargement de la page.
+
+setInterval(generateQRCode, 2000); // Générer le QR Code toutes les 20 secondes.
+	</script>
+{% endblock %}
