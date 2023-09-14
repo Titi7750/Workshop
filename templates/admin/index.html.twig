@@ -1,76 +1,80 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Espace Administrateur
+{% endblock %}
 
 {% block stylesheets %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f7f7f7;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-    h1, p {
-        color: #333;
-    }
-    button {
-        padding: 15px 30px;
-        background-color: orange;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-        margin-top: 30px;
-        margin-bottom: 50px;
-    }
-    button:hover {
-        background-color: green;
-    }
-    #qrcode {
-        display: none;
-    }
-</style>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f7f7f7;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+		}
+		h1,
+		p {
+			color: #333;
+		}
+		button {
+			padding: 15px 30px;
+			background-color: orange;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			margin-top: 30px;
+			margin-bottom: 50px;
+		}
+		button:hover {
+			background-color: green;
+		}
+		#qrcode {
+			display: none;
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-    <h1>Faire l'appel</h1>
+	{% include 'menu/menu.html.twig' %}
 
-    {% for user in users %}
-        <p>{{ user.firstname }}</p>
-    {% endfor %}
+	<h1>Faire l'appel</h1>
 
-    <button id="generateQR">Générer un code QR</button>
-    <div id="qrcode"></div>
+	{% for user in users %}
+		<p>{{ user.firstname }}</p>
+	{% endfor %}
 
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script>
+	<button id="generateQR">Générer un code QR</button>
+	<div id="qrcode"></div>
+
+	<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+	<script>
 		const href = "https://vkpgbxvb-8000.euw.devtunnels.ms/";
-		const size = 256;
+const size = 256;
 
-        function generateQRCode() {
-			const timestamp = new Date().getTime();
-			const newHref = href + "?timestamp=" + timestamp;
+function generateQRCode() {
+const timestamp = new Date().getTime();
+const newHref = href + "?timestamp=" + timestamp;
 
-            const qrcodeElement = document.querySelector("#qrcode");
-            qrcodeElement.innerHTML = '';
+const qrcodeElement = document.querySelector("#qrcode");
+qrcodeElement.innerHTML = '';
 
-            new QRCode(qrcodeElement, {
-				text: newHref,
-                width: size,
-                height: size
-            });
-        }
+new QRCode(qrcodeElement, {
+text: newHref,
+width: size,
+height: size
+});
+}
 
-        document.getElementById('generateQR').addEventListener('click', function() {
-            document.getElementById("qrcode").style.display = 'block';
-            document.getElementById('generateQR').style.display = "none";
-            generateQRCode();
-            setInterval(generateQRCode, 2000);
-        });
-    </script>
+document.getElementById('generateQR').addEventListener('click', function () {
+document.getElementById("qrcode").style.display = 'block';
+document.getElementById('generateQR').style.display = "none";
+generateQRCode();
+setInterval(generateQRCode, 2000);
+});
+	</script>
 {% endblock %}
