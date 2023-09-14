@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,9 +22,9 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-        $users = $this->doctrine->getRepository(User::class)->find('ROLE_USER');
+        $users = $userRepository->findOnlyUsers();
 
         return $this->render('admin/index.html.twig', [
             'users' => $users,
