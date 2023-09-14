@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Espace Administrateur
+{% endblock %}
 
 {% block stylesheets %}
 <style>
@@ -95,27 +96,27 @@
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
 		const href = "https://vkpgbxvb-8000.euw.devtunnels.ms/";
-		const size = 256;
+const size = 256;
 
-        function generateQRCode() {
-			const timestamp = new Date().getTime();
-			const newHref = href + "?timestamp=" + timestamp;
+function generateQRCode() {
+const timestamp = new Date().getTime();
+const newHref = href + "?timestamp=" + timestamp;
 
-            const qrcodeElement = document.querySelector("#qrcode");
-            qrcodeElement.innerHTML = '';
+const qrcodeElement = document.querySelector("#qrcode");
+qrcodeElement.innerHTML = '';
 
-            new QRCode(qrcodeElement, {
-				text: newHref,
-                width: size,
-                height: size
-            });
-        }
+new QRCode(qrcodeElement, {
+text: newHref,
+width: size,
+height: size
+});
+}
 
-        document.getElementById('generateQR').addEventListener('click', function() {
-            document.getElementById("qrcode").style.display = 'block';
-            document.getElementById('generateQR').style.display = "none";
-            generateQRCode();
-            setInterval(generateQRCode, 2000);
-        });
-    </script>
+document.getElementById('generateQR').addEventListener('click', function () {
+document.getElementById("qrcode").style.display = 'block';
+document.getElementById('generateQR').style.display = "none";
+generateQRCode();
+setInterval(generateQRCode, 2000);
+});
+	</script>
 {% endblock %}
