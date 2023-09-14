@@ -100,7 +100,7 @@ const size = 256;
 
 function generateQRCode() {
 const timestamp = new Date().getTime();
-const newHref = href + "?timestamp=" + timestamp;
+const newHref = href + 'signature';
 
 const qrcodeElement = document.querySelector("#qrcode");
 qrcodeElement.innerHTML = '';
