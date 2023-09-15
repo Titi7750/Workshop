@@ -1,6 +1,10 @@
 {% block stylesheets %}
 	<style>
-		nav {}
+		nav {
+			display: flex;
+			justify-content: flex-end;
+		}
+		
 		.menu {
 			padding: 15px 30px;
 			background-color: orange;
@@ -9,9 +13,13 @@
 			border-radius: 5px;
 			cursor: pointer;
 			transition: background-color 0.3s;
-			margin-top: 30px;
-			margin-bottom: 50px;
 			text-decoration: none;
+		}
+
+		video {
+			display: block;
+			width: 480px;
+			margin: 10% auto 35px;
 		}
 
 		.menu:hover {

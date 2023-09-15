@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}edusign v2 - Connexion{% endblock %}
+{% block title %}edusign v2 - Connexion
+{% endblock %}
 
 {% block stylesheets %}
 <style>
@@ -39,7 +40,7 @@
     }
     .btn {
         padding: 10px 15px;
-        background-color: #ffc107;
+        background-color: yellow;
         color: black;
         border: none;
         border-radius: 4px;
@@ -61,30 +62,33 @@
 {% endblock %}
 
 {% block body %}
-<div class="container">
-    <div class="site-title">Edusign V2</div>
+	<div class="container">
+		<div class="site-title">Edusign V2</div>
 
-<div class="container">
-	<form method="post">
-		{% if error %}
-			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
+		<div class="container">
+			<form method="post">
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
 
-		{% if app.user %}
-			<div class="mb-3">
-				Vous êtes connecté en tant que {{ app.user.userIdentifier }},
-				<a href="{{ path('app_logout') }}">Déconnexion</a>
-			</div>
-		{% endif %}
+				{% if app.user %}
+					<div class="mb-3">
+						Vous êtes connecté en tant que
+						{{ app.user.userIdentifier }},
+						<a href="{{ path('app_logout') }}">Déconnexion</a>
+					</div>
+				{% endif %}
 
-		<h1 class="h3 mb-3 font-weight-normal">Bienvenue ! </h1>
-		<label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+				<h1 class="h3 mb-3 font-weight-normal">Bienvenue !
+				</h1>
+				<label for="inputEmail">Email</label>
+				<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
 
-		<label for="inputPassword">Password</label>
-		<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-		<button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
-	</form>
-</div>
+				<label for="inputPassword">Password</label>
+				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password">
+				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+				<button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+			</form>
+		</div>
+	</div>
 {% endblock %}

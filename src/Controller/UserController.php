@@ -29,6 +29,10 @@ class UserController extends AbstractController
     {
         $user = $this->getUser();
 
+        if(!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('user/sign.html.twig', [
             'user' => $user,
         ]);
@@ -41,6 +45,6 @@ class UserController extends AbstractController
         $user->setIsSign(true);
         $this->doctrine->getManager()->flush();
         
-        return $this->redirectToRoute('app_profile');
+        return $this->redirectToRoute('app_signature');
     }
 }

@@ -10,38 +10,36 @@
 	<script src="https://cdn.jsdelivr.net/npm/jsqr@1.3.1/dist/jsQR.js"></script>
 	<script>
 		const video = document.getElementById("qr-video");
-const canvasElement = document.getElementById("qr-canvas");
-const canvas = canvasElement.getContext("2d");
+		const canvasElement = document.getElementById("qr-canvas");
+		const canvas = canvasElement.getContext("2d");
 
-navigator.mediaDevices.getUserMedia({
-video: {
-facingMode: "environment"
-}
-}).then(function (stream) {
-video.srcObject = stream;
-video.setAttribute("playsinline", true); // nécessaire pour iPhone
-video.play();
-requestAnimationFrame(tick);
-});
+		navigator.mediaDevices.getUserMedia({
+			video: {
+				facingMode: "environment"
+			}
+		}).then(function (stream) {
+			video.srcObject = stream;
+			video.setAttribute("playsinline", true);
+			video.play();
+			requestAnimationFrame(tick);
+		});
 
-function tick() {
-if (video.readyState === video.HAVE_ENOUGH_DATA) {
-canvasElement.hidden = false;
+		function tick() {
+			if (video.readyState === video.HAVE_ENOUGH_DATA) {
+				canvasElement.hidden = false;
 
-canvasElement.height = video.videoHeight;
-canvasElement.width = video.videoWidth;
-canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+				canvasElement.height = video.videoHeight;
+				canvasElement.width = video.videoWidth;
+				canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
 
-const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
-const code = jsQR(imageData.data, imageData.width, imageData.height, {inversionAttempts: "dontInvert"});
+				const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+				const code = jsQR(imageData.data, imageData.width, imageData.height, {inversionAttempts: "dontInvert"});
 
-if (code) {
-window.location.href = code.data; // Redirige automatiquement vers l'URL du code QR
-}
-}
-
-requestAnimationFrame(tick);
-
-}
+				if (code) {
+					window.location.href = code.data;
+				}
+			}
+			setTimeout(tick, 2000);
+		}
 	</script>
 {% endblock %}

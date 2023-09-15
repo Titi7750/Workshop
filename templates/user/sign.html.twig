@@ -5,6 +5,12 @@
 
 {% block stylesheets %}
 	<style>
+		form {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
 		button {
 			padding: 15px 30px;
 			background-color: orange;
@@ -13,8 +19,6 @@
 			border-radius: 5px;
 			cursor: pointer;
 			transition: background-color 0.3s;
-			margin-top: 30px;
-			margin-bottom: 50px;
 		}
 		button:hover {
 			background-color: green;
@@ -23,21 +27,27 @@
 {% endblock %}
 
 {% block body %}
-	<button class="sign-button">Dire que je suis présent</button>
+	<div>
+		<p id="signe"></p>
+	</div>
+	<form action="/update-sign" method="POST">
+		<button type="submit" class="sign-button">Dire que je suis présent</button>
+		<input type="hidden" name="id" value="{{ user.id }}"/>
+	</form>
 
 	<script>
-		document.querySelector('.sign-button').addEventListener('click', function(){
-			const xhr = new XMLHttpRequest();
-			xhr.open('POST', '/update-sign');
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.onload = function() {
-				if (xhr.status === 200) {
-					alert('Vous êtes bien présent !');
-				} else {
-					alert('Une erreur est survenue !');
-				}
-			};
-			xhr.send(JSON.stringify({ id: {{ user.id }} }));
-		});
+		if ({{ user.isIsSign }}) {
+			var text = document.getElementById('signe');
+			var di
+			text.innerHTML = "Merci d'avoir signé ! Vous pouvez fermer la page.";
+			text.style.backgroundColor = "green";
+			text.style.color = "#fff";
+			text.style.padding = "15px 30px";
+			text.style.borderRadius = "5px";
+			text.style.textAlign = "center";
+			text.style.fontSize = "20px";
+			text.style.width = "20%";
+			text.style.margin = "auto";
+		}
 	</script>
 {% endblock %}
