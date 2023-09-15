@@ -39,13 +39,12 @@
     /* Styles ajoutés pour le tableau */
     table {
         border-collapse: collapse;
-        position: absolute; /* Pour positionner le tableau */
-        
-        left: 20px;       /* À gauche de l'écran */
-        width: auto;      /* Adapter la largeur au contenu */
+        position: relative;
+        width: auto;      
         background-color: white;
-        border-radius: 5px;
+        border-radius: 10px;
         overflow: hidden;
+        border: 10px black;
         box-shadow: 0 0 10px rgba(0,0,0,0.15);
     }
     th, td {
@@ -64,6 +63,7 @@
 
 {% block body %}
     {% include "menu/menu.html.twig" %}
+    
     <h1>Faire l'appel</h1>
     
     <button id="generateQR">Générer un code QR</button>

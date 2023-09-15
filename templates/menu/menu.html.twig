@@ -3,6 +3,8 @@
 		nav {
 			display: flex;
 			justify-content: flex-end;
+			width: 100%;
+			margin-top: 100px;
 		}
 		
 		.menu {
@@ -14,6 +16,7 @@
 			cursor: pointer;
 			transition: background-color 0.3s;
 			text-decoration: none;
+			
 		}
 
 		video {
@@ -25,13 +28,33 @@
 		.menu:hover {
 			background-color: #ff8c00;
 		}
+		.header {
+    		width: 100%;
+    		background-color: #FFA500; /* couleur d'arrière-plan du header, à ajuster selon vos besoins */
+    		padding: 20px 0;
+    		text-align: center;
+    		color: white; /* couleur du texte */
+    		font-weight: bold;
+    		font-size: 24px;
+			position: fixed;
+   			top: 0;
+    		left: 0;
+    		z-index: 1000;    
+		}
+
+
 	</style>
 {% endblock %}
 
 {% block body %}
+<div class="header">
+    	Edusign v2
+	</div>
 	<nav>
 		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 			<a class="menu" href="{{ path('app_logout') }}">Déconnexion</a>
 		{% endif %}
 	</nav>
+	
+	
 {% endblock %}
