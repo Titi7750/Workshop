@@ -63,6 +63,7 @@
 {% endblock %}
 
 {% block body %}
+    {% include "menu/menu.html.twig" %}
     <h1>Faire l'appel</h1>
     
     <button id="generateQR">Générer un code QR</button>
@@ -100,7 +101,7 @@ const size = 256;
 
 function generateQRCode() {
 const timestamp = new Date().getTime();
-const newHref = href + 'signature';
+const newHref = href + 'sign';
 
 const qrcodeElement = document.querySelector("#qrcode");
 qrcodeElement.innerHTML = '';
